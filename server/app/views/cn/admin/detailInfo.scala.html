@@ -1,0 +1,167 @@
+@import models.Tables.BasicinfoRow
+@import models.Tables.ClassifyRow
+@import models.Tables.AppendixRow
+@(allInfo: (BasicinfoRow, ClassifyRow, AppendixRow))
+@basicInfo = @{
+	allInfo._1
+}
+@classify = @{
+	allInfo._2
+}
+@appendix = @{
+	allInfo._3
+}
+@cn.admin.main("详细信息") {
+	<style>
+			th {
+				width: 20%;
+			}
+
+			.myBold {
+			}
+
+			.myTd {
+				max-height: 150px;
+				overflow: auto;
+				padding-right: 25px;
+			}
+			.monospace {
+				font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+			}
+	</style>
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<h2 class="page-heading"
+			style="text-align: left;
+				border-bottom: 5px solid #e9f3f4">详细信息</h2>
+		</div>
+	</div>
+	<div class="table-responsive">
+		<table class="table table-striped table-hover table-bordered" style="table-layout: fixed;
+			word-wrap: break-word">
+			<tbody>
+				<tr>
+					<th>菌种编号</th>
+					<td>@basicInfo.id</td>
+				</tr>
+				<tr>
+					<th>原始编号</th>
+					<td>@basicInfo.originalid</td>
+				</tr>
+				<tr>
+					<th>中文名称</th>
+					<td>@basicInfo.chinesename</td>
+				</tr>
+				<tr>
+					<th>来源历史</th>
+					<td>@basicInfo.source</td>
+				</tr>
+				<tr>
+					<th>收藏时间</th>
+					<td>@basicInfo.storetime</td>
+				</tr>
+				<tr>
+					<th>原产国</th>
+					<td>@basicInfo.opcountry</td>
+				</tr>
+				<tr>
+					<th>分离基物</th>
+					<td>@basicInfo.habitat</td>
+				</tr>
+				<tr>
+					<th>培养温度（℃）</th>
+					<td>@basicInfo.ctemperature</td>
+				</tr>
+				<tr>
+					<th>培养基编号（名称或配方）</th>
+					<td>@basicInfo.cnumber</td>
+				</tr>
+				<tr>
+					<th>主要特征特性</th>
+					<td>@basicInfo.mcharacteristic</td>
+				</tr>
+				<tr>
+					<th>保藏类型</th>
+					<td>@basicInfo.pkind</td>
+				</tr>
+				<tr>
+					<th>保存方法</th>
+					<td>@basicInfo.pmethod</td>
+				</tr>
+				<tr>
+					<th>生物危害程度</th>
+					<td>@basicInfo.bhlevel</td>
+				</tr>
+				<tr>
+					<th>实物状态</th>
+					<td>@basicInfo.pstate</td>
+				</tr>
+				<tr>
+					<th>门名</th>
+					<td>@classify.phylum</td>
+				</tr>
+				<tr>
+					<th>纲名</th>
+					<td>@classify.outline</td>
+				</tr>
+				<tr>
+					<th>目名</th>
+					<td>@classify.order</td>
+				</tr>
+				<tr>
+					<th>科名</th>
+					<td>@classify.family</td>
+				</tr>
+				<tr>
+					<th>属名</th>
+					<td>@classify.genus</td>
+				</tr>
+				<tr>
+					<th>种名加词</th>
+					<td>@classify.species</td>
+				</tr>
+				<tr>
+					<th>ITS序列</th>
+					<td class="monospace ">
+						<div class="myTd">
+							<div id="cds">
+							@basicInfo.its
+							</div>
+						</div>
+
+					</td>
+				</tr>
+				<tr>
+					<th>18S序列</th>
+					<td class="monospace ">
+						<div class="myTd">
+							<div id="cds">
+							@basicInfo.eighteens
+							</div>
+						</div>
+
+					</td>
+				</tr>
+				<tr>
+					<th>价格</th>
+					<td>@basicInfo.price</td>
+				</tr>
+				<tr>
+					<th>库存</th>
+					<td>@basicInfo.inventory</td>
+				</tr>
+				<tr>
+					<th>附件</th>
+					<td>@appendix.images</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="row">
+		<div class="col-sm-5">
+			菌种信息有变动？点击此处<a href="@routes.AdminController.updateAllInfoBefore(basicInfo.id)">修改信息</a>
+		</div>
+	</div>
+
+
+}

@@ -1,0 +1,234 @@
+@()
+@cn.main("18s序列Blast比对查找") {
+
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<h2 class="page-heading"
+			style="text-align: left;
+				border-bottom: 5px solid #e9f3f4">18s序列Blast比对查找</h2>
+		</div>
+	</div>
+
+	<form class="registration-form form-horizontal" id="form"
+	accept-charset="UTF-8" method="post">
+
+		<div class="form-group">
+			<label class="control-label col-sm-2">请输入一段序列:</label>
+			<div class="col-sm-8">
+				<textarea class="form-control" name="seq" id="mCharacteristic" rows="5"></textarea>
+				<span class="help-block"><a href="#" onclick="javascript:EighteenS.showExample(this, 'seq')"><em>
+					示例</em></a></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-2">evalue:</label>
+			<div class="col-sm-2">
+				<input class="form-control" name="evalue" id="mCharacteristic" value="10">
+			</div>
+
+			<label class="control-label col-sm-2">word size:</label>
+			<div class="col-sm-2">
+				<input class="form-control" name="wordSize" id="mCharacteristic" value="28">
+			</div>
+
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-2">max target seqs:</label>
+			<div class="col-sm-2">
+				<input class="form-control" name="maxTargetSeqs" id="mCharacteristic" value="10">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="actions col-sm-offset-2 col-sm-2">
+				<button type="button" class="btn btn-primary" style="width: 90%;" id="search" onclick="mySearch()">
+					比对查找</button>
+			</div>
+
+			<div class="actions  col-sm-2">
+				<button type="reset" class="btn btn-primary" style="width: 90%;">
+					重置</button>
+			</div>
+		</div>
+
+	</form>
+
+	<hr>
+
+	<label>请选择要显示的列:</label>
+	<div id="checkbox" class="checkbox">
+
+	</div>
+
+	<div id="toolbar">
+			&nbsp;关键词：
+	</div>
+
+	<table class="display table table-bordered" id="table" data-pagination="true" data-search="true"
+	data-toolbar="#toolbar" data-page-list="[10, 25, 50, 100, all]" data-search-align="left" data-multiple-search="true"
+	>
+		<thead>
+			<tr>
+				<th data-field="id" data-sortable="true">菌种编号</th>
+				<th data-field="evalue" data-sortable="true">evalue</th>
+				<th data-field="originalid" data-sortable="true">原始编号</th>
+				<th data-field="chinesename" data-sortable="true">中文名称</th>
+				<th data-field="source" data-sortable="true">来源历史</th>
+				<th data-field="storetime" data-sortable="true">收藏时间</th>
+				<th data-field="opcountry" data-sortable="true">原产国</th>
+				<th data-field="habitat" data-sortable="true">分离基物</th>
+				<th data-field="ctemperature" data-sortable="true">培养温度（℃）</th>
+				<th data-field="cnumber" data-sortable="true">培养基编号（名称或配方）</th>
+				<th data-field="mcharacteristic" data-sortable="true">主要特征特性</th>
+				<th data-field="pkind" data-sortable="true">保藏类型</th>
+				<th data-field="pmethod" data-sortable="true">保存方法</th>
+				<th data-field="bhlevel" data-sortable="true">生物危害程度</th>
+				<th data-field="pstate" data-sortable="true">实物状态</th>
+				<th data-field="phylum" data-sortable="true">门名</th>
+				<th data-field="outline" data-sortable="true">纲名</th>
+				<th data-field="order" data-sortable="true">目名</th>
+				<th data-field="family" data-sortable="true">科名</th>
+				<th data-field="genus" data-sortable="true">属名</th>
+				<th data-field="species" data-sortable="true">种名加词</th>
+			</tr>
+		</thead>
+	</table>
+
+	<script>
+			$(function () {
+
+				var array = ["原始编号", "中文名称", "来源历史", "收藏时间", "原产国", "分离基物", "培养温度（℃）", "培养基编号（名称或配方）",
+					"主要特征特性", "保藏类型", "保存方法", "生物危害程度", "实物状态", "门名", "纲名", "目名", "科名", "属名", "种名加词"]
+				var values = ["originalid", "chinesename", "source", "storetime", "opcountry", "habitat", "ctemperature",
+					"cnumber", "mcharacteristic", "pkind", "pmethod", "bhlevel", "pstate", "phylum", "outline", "order", "family", "genus", "species"
+				]
+				var html = ""
+				$.each(array, function (n, value) {
+							html += "<label style='margin-right: 15px'>" +
+									"<input type='checkbox' checked='checked' value='" + values[n] + "' onclick=\"setColumns('" + values[n] + "')\">" + value +
+									"</label>"
+						}
+				);
+				$("#checkbox").append(html)
+				$('#table').bootstrapTable({});
+				var hiddenArray = ["originalid", "chinesename", "source", "ctemperature", "pkind", "cnumber",
+					"habitat", "storetime", "opcountry", "pmethod", "bhlevel", "pstate"]
+				$.each(hiddenArray, function (n, value) {
+							$('#table').bootstrapTable('hideColumn', value);
+							$("input:checkbox[value=" + value + "]").attr("checked", false)
+						}
+				);
+
+				formValidation()
+			})
+
+			function mySearch() {
+				var form = $("#form")
+				var fv = form.data("formValidation")
+				fv.validate()
+				if (fv.isValid()) {
+					var element = "<div id='content'><span id='info'>正在比对查找</span>&nbsp;<img class='runningImage' src='@routes.Assets.at("images/running2.gif")' style='width: 30px;height: 20px;'></div>"
+					var index = layer.alert(element, {
+						skin: 'layui-layer-molv'
+						, closeBtn: 0,
+						btn: []
+					});
+					$.ajax({
+						url: "@routes.ToolController.eighteenSQuery()",
+						type: "post",
+						async: false,
+						data: $("#form").serialize(),
+						success: function (data) {
+							$('#table').bootstrapTable("load", data)
+							layer.close(index)
+						}
+					});
+				}
+			}
+
+			function formValidation() {
+				var infinityNumber = Number.MAX_VALUE
+				$('#form').formValidation({
+					framework: 'bootstrap',
+					icon: {
+						valid: 'glyphicon glyphicon-ok',
+						invalid: 'glyphicon glyphicon-remove',
+						validating: 'glyphicon glyphicon-refresh'
+					},
+					fields: {
+						seq: {
+							validators: {
+								notEmpty: {
+									message: '序列不能为空！'
+								},
+								regexp: {
+									regexp: /^([ATCGNatcgn]+)$/,
+									message: "序列包含非ATCGN字符！"
+								}
+							}
+						},
+						evalue: {
+							validators: {
+								notEmpty: {
+									message: 'evalue不能为空！'
+								},
+								numeric: {
+									message: 'evalue必须为数字！'
+								},
+								between: {
+									min: "0",
+									max: infinityNumber,
+									message: "evalue必须大于等于0！"
+								}
+							}
+						},
+						wordSize: {
+							validators: {
+								notEmpty: {
+									message: 'wordSize不能为空！'
+								},
+								integer: {
+									message: 'wordSize必须为整数！'
+								},
+								between: {
+									min: "4",
+									max: infinityNumber,
+									message: "wordSize必须大于等于4！"
+								}
+							}
+						},
+						maxTargetSeqs: {
+							validators: {
+								notEmpty: {
+									message: 'max target seqs不能为空！'
+								},
+								integer: {
+									message: 'max target seqs必须为整数！'
+								},
+								between: {
+									min: "0",
+									max: infinityNumber,
+									message: "max target seqs必须大于等于0！"
+								}
+							}
+						},
+					}
+				});
+			}
+
+			function setColumns(value) {
+				var element = $("input:checkbox[value=" + value + "]")
+				if (element.is(":checked")) {
+					$('#table').bootstrapTable('showColumn', value);
+				} else {
+					$('#table').bootstrapTable('hideColumn', value);
+				}
+			}
+
+
+	</script>
+
+
+}

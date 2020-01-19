@@ -1,0 +1,73 @@
+@()(implicit request: play.api.mvc.RequestHeader)
+@cn.main("常见丝状真菌镜下照片") {
+	<style>
+			ul, ol {
+				margin-top: 0;
+				margin-bottom: 5px;
+			}
+
+			ul li {
+				line-height: 1.4em;
+			}
+
+			.bs-docs-sidebar .nav > li > a {
+				font-size: 14px;
+			}
+
+			#myNav {
+				white-space: nowrap;
+				overflow-y: auto;
+				overflow-x: hidden;
+			}
+
+			/*.affix {*/
+			/*	top: 100px;*/
+			/*}*/
+
+			/*.affix-top{*/
+			/*	top: 150px;*/
+			/*}*/
+
+
+
+	</style>
+
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<h2 class="page-heading"
+			style="text-align: left;
+				border-bottom: 5px solid #e9f3f4">常见丝状真菌镜下照片</h2>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-3" id="myScrollspy" >
+			<div class="bs-docs-sidebar affix-top" role="complementary">
+				<ul class="nav bs-docs-sidenav" id="myNav" style="height: 725px;
+					width: 250px" data-spy="affix" data-offset-top="220px">
+				</ul>
+			</div>
+		</div>
+		<div class="col-xs-9" style="margin-left: 0px">
+			<h4 id="dirName"></h4>
+			<div class="row" id="appendix" style="margin-top: 20px">
+
+			</div>
+
+		</div>
+	</div>
+
+	<script>
+			$(function () {
+				ImageIndex.init
+
+			})
+
+
+
+
+	</script>
+
+}
+
+	

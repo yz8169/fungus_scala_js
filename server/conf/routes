@@ -1,0 +1,124 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET         /fungus/test/test                                                                   controllers.TestController.test
+
+GET         /                                                                                   controllers.IndexController.toIndex
+GET         /fungus/toIndex                                                                     controllers.IndexController.toIndex
+GET         /fungus/toDeveloping                                                                controllers.IndexController.toDeveloping
+GET         /fungus/toDownload                                                                  controllers.IndexController.toDownload
+GET         /fungus/downloadData                                                                controllers.IndexController.downloadData
+GET         /fungus/openFile                                                                    controllers.IndexController.openFile
+
+GET         /fungus/admin/toIndex                                                               controllers.AdminController.toIndex
+GET         /fungus/admin/loginBefore                                                           controllers.AdminController.loginBefore
+GET         /fungus/admin/login                                                                 controllers.AdminController.login(phone:String,password:String)
+GET         /fungus/admin/logout                                                                controllers.AdminController.logout
+GET         /fungus/admin/addByFileBefore                                                       controllers.AdminController.addByFileBefore
+POST        /fungus/admin/addByFile                                                             controllers.AdminController.addByFile
+GET         /fungus/admin/addByHandBefore                                                       controllers.AdminController.addByHandBefore
+POST        /fungus/admin/addByHand                                                             controllers.AdminController.addByHand
+GET         /fungus/admin/idCheck                                                               controllers.AdminController.idCheck(id:String)
+GET         /fungus/admin/manageData                                                            controllers.AdminController.manageData
+GET         /fungus/admin/searchAllBasicInfos                                                   controllers.AdminController.searchAllBasicInfos
+GET         /fungus/admin/updateAllInfoBefore                                                   controllers.AdminController.updateAllInfoBefore(id:String)
+POST        /fungus/admin/updateAllInfo                                                         controllers.AdminController.updateAllInfo
+GET         /fungus/admin/getDetailInfo                                                         controllers.AdminController.getDetailInfo
+GET         /fungus/admin/addAppendixBefore                                                     controllers.AdminController.addAppendixBefore(id:String)
+POST        /fungus/admin/addAppendix                                                           controllers.AdminController.addAppendix(id:String)
+GET         /fungus/admin/deleteAppendixBefore                                                  controllers.AdminController.deleteAppendixBefore(id:String)
+GET         /fungus/admin/getAllFiles                                                           controllers.AdminController.getAllFiles(id:String)
+GET         /fungus/admin/deleteFile                                                            controllers.AdminController.deleteFile(id:String,fileName:String)
+GET         /fungus/admin/viewAppendixBefore                                                    controllers.AdminController.viewAppendixBefore(id:String)
+POST        /fungus/admin/deleteAllInfos                                                        controllers.AdminController.deleteAllInfos
+GET         /fungus/admin/downloadFile                                                          controllers.AdminController.downloadFile()
+GET         /fungus/admin/updateItsDatabase                                                     controllers.AdminController.updateItsDatabase
+GET         /fungus/admin/manageSubmission                                                      controllers.AdminController.manageSubmission
+GET         /fungus/admin/searchAllSubmission                                                   controllers.AdminController.searchAllSubmission
+GET         /fungus/admin/deal                                                                  controllers.AdminController.deal(id:Int)
+GET         /fungus/admin/changePasswordBefore                                                  controllers.AdminController.changePasswordBefore
+POST        /fungus/admin/changePassword                                                        controllers.AdminController.changePassword
+GET         /fungus/admin/imageConvert                                                          controllers.AdminController.imageConvert
+
+GET         /fungus/browse/toIndex                                                              controllers.BrowseController.toIndex
+GET         /fungus/browse/getPhylumInfo                                                        controllers.BrowseController.getPhylumInfo
+POST        /fungus/browse/getOutlineInfo                                                       controllers.BrowseController.getOutlineInfo
+POST        /fungus/browse/getOrderInfo                                                         controllers.BrowseController.getOrderInfo
+POST        /fungus/browse/getFamilyInfo                                                        controllers.BrowseController.getFamilyInfo
+POST        /fungus/browse/getGenusInfo                                                         controllers.BrowseController.getGenusInfo
+POST        /fungus/browse/getSpeciesInfo                                                       controllers.BrowseController.getSpeciesInfo
+POST        /fungus/browse/getIdInfo                                                            controllers.BrowseController.getIdInfo
+GET         /fungus/browse/getDetailInfo                                                        controllers.BrowseController.getDetailInfo
+
+GET         /fungus/util/getImage                                                               controllers.UtilController.getImage(id:String,fileName:String)
+
+GET         /fungus/search/toIndex                                                              controllers.SearchController.toIndex
+GET         /fungus/search/searchAllInfos                                                       controllers.SearchController.searchAllInfos
+GET         /fungus/search/toClassifyIndex                                                      controllers.SearchController.toClassifyIndex
+GET         /fungus/search/getAllPhylums                                                        controllers.SearchController.getAllPhylums
+GET         /fungus/search/getAllOutlines                                                       controllers.SearchController.getAllOutlines
+GET         /fungus/search/getAllOrders                                                         controllers.SearchController.getAllOrders
+GET         /fungus/search/getAllFamilys                                                        controllers.SearchController.getAllFamilys
+GET         /fungus/search/getAllGenus                                                          controllers.SearchController.getAllGenus
+GET         /fungus/search/getAllSpecies                                                        controllers.SearchController.getAllSpecies
+POST        /fungus/search/checkClassify                                                        controllers.SearchController.checkClassify
+GET         /fungus/search/toPhenotypeIndex                                                     controllers.SearchController.toPhenotypeIndex
+GET         /fungus/search/getAllHabitat                                                        controllers.SearchController.getAllHabitat
+GET         /fungus/search/getAllBHLevel                                                        controllers.SearchController.getAllBHLevel
+POST        /fungus/search/searchByPhenotypeData                                                controllers.SearchController.searchByPhenotypeData
+
+GET         /fungus/cart/toIndex                                                                controllers.CartController.toIndex
+GET         /fungus/cart/getCartInfo                                                            controllers.CartController.getCartInfo
+GET         /fungus/cart/addCart                                                                controllers.CartController.addCart(id:String)
+GET         /fungus/cart/deleteCart                                                             controllers.CartController.deleteCart(id:String)
+GET         /fungus/cart/deleteId                                                               controllers.CartController.deleteId(id:String)
+GET         /fungus/cart/deleteAll                                                              controllers.CartController.deleteAll
+GET         /fungus/cart/updateNum                                                              controllers.CartController.updateNum(id:String,num:String)
+GET         /fungus/cart/getNum                                                                 controllers.CartController.getNum
+POST        /fungus/cart/submit                                                                 controllers.CartController.submit
+GET         /fungus/cart/downloadInfo                                                           controllers.CartController.downloadInfo
+
+GET         /fungus/tool/toEighteenSIndex                                                       controllers.ToolController.toEighteenSIndex
+POST        /fungus/tool/eighteenSQuery                                                         controllers.ToolController.eighteenSQuery
+GET         /fungus/tool/toItsIndex                                                             controllers.ToolController.toItsIndex
+POST        /fungus/tool/itsQuery                                                               controllers.ToolController.itsQuery
+
+GET         /fungus/about/toIndex                                                               controllers.AboutController.toIndex
+GET         /fungus/about/toIndex1                                                              controllers.AboutController.toIndex1
+GET         /fungus/about/toIndex2                                                              controllers.AboutController.toIndex2
+
+GET         /fungus/contact/toIndex                                                             controllers.ContactController.toIndex
+
+GET         /fungus/data/toImageIndex                                                           controllers.DataController.toImageIndex
+GET         /fungus/data/getAllDirNames                                                         controllers.DataController.getAllDirNames
+GET         /fungus/data/imageDetailBefore                                                      controllers.DataController.imageDetailBefore
+POST        /fungus/data/getAllFiles                                                            controllers.DataController.getAllFiles
+GET         /fungus/data/drugAllergyBefore                                                      controllers.DataController.drugAllergyBefore
+GET         /fungus/data/getFileData                                                      controllers.DataController.getFileData
+GET         /fungus/data/listBefore                                                      controllers.DataController.listBefore
+
+GET         /fungus/app/getImage                                                                controllers.AppController.getImage
+
+GET         /fungus/mobile/classify/                                                            controllers.MobileController.getPhylum
+GET         /fungus/mobile/classify/:phylum/                                                    controllers.MobileController.getOutline(phylum:String)
+GET         /fungus/mobile/classify/:phylum/:outline/                                           controllers.MobileController.getOrder(phylum:String,outline:String)
+GET         /fungus/mobile/classify/:phylum/:outline/:order/                                    controllers.MobileController.getFamily(phylum:String,outline:String,order:String)
+GET         /fungus/mobile/classify/:phylum/:outline/:order/:family/                            controllers.MobileController.getGenus(phylum:String,outline:String,order:String,family:String)
+GET         /fungus/mobile/classify/:phylum/:outline/:order/:family/:genus/                     controllers.MobileController.getSpecies(phylum:String,outline:String,order:String,family:String,genus:String)
+GET         /fungus/mobile/classify/:phylum/:outline/:order/:family/:genus/:species/            controllers.MobileController.getId(phylum:String,outline:String,order:String,family:String,genus:String,species:String)
+GET         /fungus/mobile/classify/:phylum/:outline/:order/:family/:genus/:species/:id/        controllers.MobileController.getDetailInfo(phylum:String,outline:String,order:String,family:String,genus:String,species:String,id:String)
+
+GET         /fungus/dataInsert/insert                                                           controllers.DataInsertController.insertAppendix
+
+GET         /javascriptRoutes                                                                   controllers.AppController.javascriptRoutes
+
+
+
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file                                                                       controllers.Assets.at(path="/public", file)
+
+    

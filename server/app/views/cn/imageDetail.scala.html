@@ -1,0 +1,59 @@
+@(dirName:String)(implicit request: play.api.mvc.RequestHeader)
+@cn.main("图片") {
+	<style>
+			ul > li {
+				line-height: 0.5em;
+			}
+			ul, ol {
+				margin-top: 0;
+				margin-bottom: 5px;
+			}
+
+	</style>
+
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<h2 class="page-heading"
+			style="text-align: left;
+				border-bottom: 5px solid #e9f3f4">@dirName</h2>
+		</div>
+	</div>
+
+	<input name="fileName" type="hidden" value="@dirName">
+
+	<div class="row" id="appendix" style="margin-top: 20px">
+
+	</div>
+
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="kv-zoom-actions pull-right">
+						<button type="button" class="btn btn-default btn-close" title="关闭当前预览" data-dismiss="modal" aria-hidden="true"><i class="glyphicon glyphicon-remove"></i></button></div>
+					<h3 class="modal-title">
+						详细预览&nbsp;<small><span class="kv-zoom-title" id="title"></span></small><span class="kv-zoom-title"></span></h3>
+				</div>
+				<div class="modal-body">
+					<div class="floating-buttons"></div>
+					<div class="kv-zoom-body file-zoom-content">
+						<img src="" id="image" style="height: auto;
+							width: auto;
+							max-width: 100%;
+							max-height: 100%">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+			$(function () {
+				ImageDetail.init
+			})
+
+	</script>
+
+}
+
+	

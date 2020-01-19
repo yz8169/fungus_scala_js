@@ -1,0 +1,107 @@
+@()
+@cn.main("首页-菌种数据库") {
+	<style>
+			.carousel-caption {
+				background-color: #555;
+				opacity: 0.8;
+				z-index: 1;
+				width: 100%;
+				bottom: 0;
+				padding-top: 0;
+				right: 30%;
+				left: 0;
+				padding-bottom: 0
+			}
+
+			a:hover {
+				cursor: pointer;
+			}
+	</style>
+
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-8">
+					<h4 style="font-weight: bold">中心介绍</h4>
+					<p class="text-justify" style="font-size: 15px;
+						text-indent: 2em">
+						中国医学科学院病原微生物菌（毒）保藏管理中心真菌中心原称中国微生物保藏管理委员会医学真菌保藏中心，成立于1977年，由当时的国家科委指定。吴绍熙教授担任第一届中心主任，1998年吴绍熙教授正式退休后由刘维达教授接替担任中心执行主任至今。现有正高职称2人，博士生导师2人，副高职称4人，硕士生导师2人，博士5人，硕士2人，共计9人。
+							<br><a href="@routes.AboutController.toIndex()">更多...</a>
+					</p>
+					<hr>
+					<h4 style="font-weight: bold">中国医学科学院皮肤病医院真菌科简介</h4>
+					<p class="text-justify" style="font-size: 15px;
+						text-indent: 2em">
+						中国医学科学院皮肤病医院（研究所）真菌科创建于1954年5月，建所初期聘请原中央卫生实验研究院医学真菌学家郭可大教授和张柏英教授来所兼任顾问、教授和副教授工作。1958年中国北京协和医学院皮肤病教研室并入我所后，曹松年教授兼任真菌科主任。1962年真菌科正式隶属于皮肤病研究室，改称为学组，1980年正式独立成为真菌病研究室，1980~1993年由吴绍熙教授任真菌病研究室主任。1993年吴绍熙教授光荣退修后，由刘维达教授主持工作，担任真菌科及真菌病研究室主任至今。吴绍熙教授和刘维达教授均为博士生导师、国内外著名的医学真菌学家和医学真菌教育家。
+						<br><a href="@routes.AboutController.toIndex1()">更多...</a></p>
+
+				</div>
+
+				<div class="col-sm-4" >
+					<img src="@routes.Assets.at("images/index1.jpg")" style="margin-top: 50px;
+						width: 350px">
+				</div>
+			</div>
+
+			<hr>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<h4 style="font-weight: bold">菌株统计</h4>
+					<ul class="list-inline">
+						<li>
+							<h4 ><span style="font-weight: bold;
+								font-size: 18px">400</span>
+								<small>余株标准菌株；</small>
+							</h4>
+						</li>
+						<li>
+							<h4 ><span style="font-weight: bold;
+								font-size: 18px">5000</span>
+								<small>余株临床菌株；</small>
+							</h4>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+			<hr>
+
+
+			<div class="row">
+				<div class="col-sm-3">
+					<h4 style="font-weight: bold">专家介绍</h4>
+					<hr>
+
+					<div class="col-sm-6">
+						<a href="@routes.AboutController.toIndex2()"><img src="@routes.Assets.at("images/contact1.jpg")" style="height: 120px">
+							<div class="caption" style="font-size: 16px" align="center">
+								刘维达
+							</div></a>
+					</div>
+					<div class="col-sm-6">
+						<a href="@routes.AboutController.toIndex2()"><img src="@routes.Assets.at("images/contact3.jpg")" style="height: 120px" >
+							<div class="caption" style="font-size: 16px" align="center">
+								李筱芳
+							</div></a>
+					</div>
+				</div>
+				<div class="col-sm-9" align="center" style="margin-left: -20px">
+					<img src="@routes.Assets.at("images/myBanner.png")" style="width: 800px;">
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+	<div>
+		<p style="text-indent: 1em;">
+			<a href="http://www.miitbeian.gov.cn" target="_blank">
+				沪ICP备17011715号</a>
+		</p>
+	</div>
+
+
+}

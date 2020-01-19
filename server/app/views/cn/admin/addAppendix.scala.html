@@ -1,0 +1,71 @@
+@(id: String)
+@cn.admin.main("添加附件") {
+	<style>
+			.btn {
+				display: inline-block;
+				margin-bottom: 0;
+				font-weight: normal;
+				text-align: center;
+				vertical-align: middle;
+				-ms-touch-action: manipulation;
+				touch-action: manipulation;
+				cursor: pointer;
+				background-image: none;
+				border: 1px solid #ccc;
+				white-space: nowrap;
+				padding: 6px 12px;
+				font-size: 14px;
+				line-height: 1.42857143;
+				border-radius: 4px;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+	</style>
+	<form class="registration-form" id="form"
+	accept-charset="UTF-8" method="post" style="margin: 20px;" enctype="multipart/form-data">
+
+		<div class="row">
+			<div class="form-group col-sm-12">
+				<h2 class="page-heading"
+				style="text-align: left;
+					border-bottom: 5px solid #e9f3f4">新增附件</h2>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-sm-12">
+				<label>选择数据文件(仅限图片):</label>
+				<input id="input-1" type="file" multiple class="file" name="file">
+			</div>
+		</div>
+	</form>
+	<div style="margin: 20px">
+		<div class="row">
+			<div class="form-group col-sm-12">
+				<span>注：文件默认依次上传，后上传的同名文件会覆盖先前的文件！</span>
+				<div>附件上传完成后，你可以进行<a href="@routes.AdminController.viewAppendixBefore(id)">查看</a>或者
+					<a href="@routes.AdminController.deleteAppendixBefore(id)">删除</a></div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+			$("#input-1").fileinput({
+				showPreview: true,
+				browseLabel: "选择...",
+				removeLabel: "删除文件",
+				uploadLabel: "上传附件",
+				language: "zh",
+				allowedFileTypes: ["image"],
+				uploadUrl: "addAppendix?id=@id"
+
+			});
+
+
+
+
+
+	</script>
+}

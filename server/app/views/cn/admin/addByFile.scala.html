@@ -1,0 +1,123 @@
+@()
+@cn.admin.main("通过文件新增真菌数据") {
+	<form class="registration-form" id="form"
+	accept-charset="UTF-8" method="post" style="margin: 20px;" enctype="multipart/form-data">
+
+		<div class="row">
+			<div class="form-group col-sm-12">
+				<h2 class="page-heading"
+				style="text-align: left;
+					border-bottom: 5px solid #e9f3f4">新增菌种信息</h2>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-sm-12">
+				<label>选择数据文件:</label>
+				<input id="input-1" type="file" class="file" name="file" data-show-preview="false"
+				data-show-upload="false">
+			</div>
+		</div>
+
+		<div class="checkbox" style="margin-top: 0">
+			<label>
+				<input type="checkbox" checked="checked" name="isUpdate"> 覆盖同菌种编号数据
+			</label>
+		</div>
+
+		<div class="actions">
+			<input type="button" id="submit" value="更新数据库"
+			class="button primary huge" style="width: 100%">
+		</div>
+	</form>
+	<div style="margin: 20px">
+		<p>注：修改文件后请重新选择文件或刷新此页面;excel数据文件第一行为表头，第二行开始为数据;excel数据文件总共有25列，每一列的含义如下：</p>
+		<ul>
+			<li>1.菌种编号</li>
+			<li>2.原始编号</li>
+			<li>3.中文名称</li>
+			<li>4.来源历史</li>
+			<li>5.收藏时间</li>
+			<li>6.原产国</li>
+			<li>7.分离基物</li>
+			<li>8.培养温度（℃）</li>
+			<li>9.培养基编号（名称或配方）</li>
+			<li>10.主要特征特性</li>
+			<li>11.保藏类型</li>
+			<li>12.保存方法</li>
+			<li>13.生物危害程度</li>
+			<li>14.实物状态</li>
+			<li>15.门名</li>
+			<li>16.纲名</li>
+			<li>17.目名</li>
+			<li>18.科名</li>
+			<li>19.属名</li>
+			<li>20.种名加词</li>
+			<li>21.ITS序列</li>
+			<li>22.18S序列</li>
+			<li>23.价格</li>
+			<li>24.库存</li>
+			<li>25.共享方式</li>
+		</ul>
+	</div>
+
+	<script>
+			$(document).ready(function () {
+				$("#submit").click(function () {
+					var form = new FormData($("#form")[0])
+					var file = $("#input-1").val()
+					var extStart = file.lastIndexOf(".") + 1;
+					var suffix = file.substring(extStart, file.length).toUpperCase()
+					if (file === "") {
+						swal("错误", "请选择一个数据文件！", "error")
+					} else if (suffix !== "XLSX") {
+						swal("错误", "请选择一个Excel(*.xlsx)格式的数据文件！", "error")
+					} else {
+						var element = "<div id='content'><span id='info'>正在更新数据库</span>&nbsp;<img class='runningImage' src='@routes.Assets.at("images/running2.gif")' style='width: 30px;height: 20px;'></div>"
+						var index = layer.alert(element, {
+							skin: 'layui-layer-molv'
+							, closeBtn: 0,
+							btn: []
+						});
+						$.ajax({
+							url: "addByFile",
+							type: "post",
+							data: form,
+							processData: false,
+							contentType: false,
+							success: function (data) {
+								if (typeof(data.error) === "undefined") {
+									layer.close(index)
+									layer.alert('数据库更新完成！', {
+										skin: 'layui-layer-molv'
+										, closeBtn: 0
+									});
+								} else {
+									layer.close(index)
+									swal("错误", data.error, "error")
+								}
+							},
+							error: function (e) {
+								swal("错误", "异常操作！", "error")
+							}
+						});
+
+					}
+				})
+			});
+
+			$("#input-1").fileinput({
+				showPreview: false,
+				browseLabel: "选择...",
+				removeLabel: "删除文件",
+				language: "zh"
+			});
+
+
+
+
+
+	</script>
+
+
+}

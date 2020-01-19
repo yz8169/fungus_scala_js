@@ -1,0 +1,59 @@
+@()
+@cn.admin.main("用户购物信息") {
+
+	<div class="row">
+		<div class="form-group col-sm-12" style="margin-bottom: 0">
+			<h2 class="page-heading"
+			style="text-align: left;
+				border-bottom: 5px solid #e9f3f4">用户购物信息</h2>
+		</div>
+	</div>
+
+	<table class="display table table-bordered" id="table" data-pagination="true" data-search="true"
+	data-toolbar="#toolbar" data-page-list="[10, 25, 50, 100, all]" data-multiple-search="true" data-card-view="true"
+	data-show-toggle="true">
+		<thead>
+			<tr>
+				<th data-field="name" data-sortable="true">姓名</th>
+				<th data-field="department" data-sortable="true">单位</th>
+				<th data-field="phone" data-sortable="true">手机</th>
+				<th data-field="email" data-sortable="true">邮箱</th>
+				<th data-field="address" data-sortable="true">地址</th>
+				<th data-field="content" data-sortable="true">信息</th>
+				<th data-field="totalPrice" data-sortable="true">总价</th>
+				<th data-field="time" data-sortable="true">时间</th>
+				<th data-field="operate" data-sortable="true">操作</th>
+			</tr>
+		</thead>
+	</table>
+
+	<script>
+		$(function () {
+			$.ajax({
+				url: "@routes.AdminController.searchAllSubmission()",
+				type: "get",
+				dataType: "json",
+				success: function (data) {
+					$('#table').bootstrapTable({
+						data: data
+					});
+				},
+			})
+
+		})
+
+		function deal(id) {
+			$.ajax({
+				url: "deal?id="+id,
+				type: "get",
+				dataType: "json",
+				success: function (data) {
+					$('#table').bootstrapTable("load", data);
+				},
+			})
+
+		}
+
+	</script>
+
+}

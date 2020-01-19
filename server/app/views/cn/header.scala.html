@@ -1,0 +1,110 @@
+@()
+
+<div class="page-header">
+	<div class="row">
+		<div class="col-sm-offset-2 col-md-9">
+			<h4 style="color: #F5F5F5;
+				font-size: 30px;
+				margin-bottom: 0;
+				margin-top: 20px;
+				text-shadow: 2px 2px 0 #555">Chinese Medcine Mycology Database
+			</h4>
+		</div>
+		<div class="col-sm-offset-3 col-md-9">
+			<h4 style="color: #F5F5F5;
+				font-size: 30px;
+				margin-bottom: 10px;
+				text-shadow: 2px 2px 0 #555">
+			全国医学真菌菌种保藏管理中心</h4>
+		</div>
+	</div>
+
+</div>
+
+<nav class="navbar navbar-inverse">
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+		data-target="#sub" aria-expanded="false">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+	</div>
+	<div class="collapse navbar-collapse" id="sub">
+		<ul class="nav navbar-nav">
+			<li><a href="@routes.IndexController.toIndex()"><span class="glyphicon glyphicon-home"></span> 首页</a></li>
+			<li class="dropdown">
+				<a href="@routes.BrowseController.toIndex"><span class="glyphicon glyphicon-eye-open"></span> 浏览</a>
+			</li>
+
+			<li class="dropdown">
+				<a href="#"><span class="glyphicon glyphicon-search"></span>
+					搜索&nbsp;<span class="fa fa-caret-down"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="@routes.SearchController.toIndex">查看全部</a></li>
+					<li><a href="@routes.SearchController.toClassifyIndex">基于分类学信息搜索</a></li>
+					<li><a href="@routes.SearchController.toPhenotypeIndex()">基于表型信息搜索</a></li>
+				</ul>
+			</li>
+
+			<li class="dropdown">
+				<a href="#"><span class="fa fa-wrench"></span> 工具&nbsp;<span class="fa fa-caret-down"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="@routes.ToolController.toEighteenSIndex()">18s序列Blast比对查找</a></li>
+					<li><a href="@routes.ToolController.toItsIndex()">ITS序列Blast比对查找</a></li>
+				</ul>
+			</li>
+
+			<li class="dropdown">
+				<a href="#"><span class="fa fa-database"></span> 资料&nbsp;<span class="fa fa-caret-down"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="@routes.IndexController.toDownload()">菌种目录</a></li>
+					<li><a href="@routes.DataController.toImageIndex()">常见丝状真菌镜下照片</a></li>
+					<li><a href="@routes.DataController.drugAllergyBefore()">药敏信息</a></li>
+					<li><a href="@routes.DataController.listBefore()">已录质谱信息菌株列表</a></li>
+				</ul>
+			</li>
+
+			<li><a href="@routes.CartController.toIndex()"><span class="fa fa-shopping-cart"></span>
+				购物车&nbsp;<span class="badge">0</span></a>
+			</li>
+
+			<li><a href="@routes.AboutController.toIndex()"><span class="fa fa-info-circle"></span>
+				关于我们</a>
+			</li>
+
+
+			<li><a href="@routes.ContactController.toIndex()"><span class="glyphicon glyphicon-send"></span>
+				联系我们</a>
+			</li>
+
+		</ul>
+	</div>
+</nav>
+
+<script>
+
+		$(function () {
+			getNum()
+		})
+
+		function getNum() {
+			$.ajax({
+				url: "@routes.CartController.getNum",
+				success: function (data) {
+					$(".badge").text(data)
+				}
+			})
+		}
+
+		function addCart(id) {
+			$.ajax({
+				url: "/fungus/cart/addCart?id=" + id,
+				success: function (data) {
+					getNum()
+				}
+			})
+		}
+
+	</script>

@@ -1,0 +1,99 @@
+@(infos: Seq[String], data: ClassifyData, title: String)
+@cn.mobile.main("浏览") {
+	<div class="page">
+		<header class="bar bar-nav">
+			@if(title != "门名") {
+				<a class="button button-link button-nav pull-left back" href="../">
+					<span class="icon icon-left"></span>
+					上一级分类
+				</a>
+			}
+
+			<h1 class="title">@title</h1>
+		</header>
+		<div class="content">
+			<div class="content-block-title">
+			@if(data.phylum == "") {
+				分类&nbsp;<span class="fa fa-caret-right"></span>
+			} else {
+				<a href="/fungus/mobile/classify/">分类</a>
+					&nbsp;
+				<span class="fa fa-caret-right"></span>
+				@if(data.outline == "") {
+						&nbsp;门名:@data.phylum&nbsp;
+					<span class="fa fa-caret-right"></span>
+				} else {
+						&nbsp;
+					<a href="/fungus/mobile/classify/@data.phylum/">门名:@data.phylum</a>
+						&nbsp;
+					<span class="fa fa-caret-right"></span>
+					@if(data.order == "") {
+							&nbsp;纲名:@data.outline&nbsp;
+						<span class="fa fa-caret-right"></span>
+					} else {
+							&nbsp;
+						<a href="/fungus/mobile/classify/@data.phylum/@data.outline/">纲名:@data.outline</a>
+							&nbsp;
+						<span class="fa fa-caret-right"></span>
+						@if(data.family == "") {
+								&nbsp;目名:@data.order&nbsp;
+							<span class="fa fa-caret-right"></span>
+						} else {
+								&nbsp;
+							<a href="/fungus/mobile/classify/@data.phylum/@data.outline/@data.order/">目名:@data.order</a>
+								&nbsp;
+							<span class="fa fa-caret-right"></span>
+							@if(data.genus == "") {
+									&nbsp;科名:@data.family&nbsp;
+								<span class="fa fa-caret-right"></span>
+							} else {
+									&nbsp;
+								<a href="/fungus/mobile/classify/@data.phylum/@data.outline/@data.order/@data.family/">
+									科名:@data.family</a>
+									&nbsp;
+								<span class="fa fa-caret-right"></span>
+								@if(data.species == "") {
+										&nbsp;属名:@data.genus&nbsp;
+									<span class="fa fa-caret-right"></span>
+								} else {
+										&nbsp;
+									<a href="/fungus/mobile/classify/@data.phylum/@data.outline/@data.order/@data.family/@data.genus/">
+										属名:@data.genus</a>
+										&nbsp;
+									<span class="fa fa-caret-right"></span>
+										&nbsp;种名:@data.species&nbsp;
+									<span class="fa fa-caret-right"></span>
+								}
+							}
+						}
+					}
+				}
+			}
+			</div>
+
+			@for(info <- infos) {
+				<div class="card">
+					<div class="card-content">
+						<div class="card-content-inner">
+							@if(title=="菌种编号"){
+								<a href="@info/" class="external">@info</a>
+							}else{
+								<a href="@info/">@info</a>
+							}
+
+						</div>
+					</div>
+				</div>
+
+			}
+		</div>
+	</div>
+}
+
+
+
+
+
+
+
+

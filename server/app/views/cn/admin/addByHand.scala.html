@@ -1,0 +1,259 @@
+@()(implicit flash: Flash)
+@cn.admin.main("通过手动新增菌种信息") {
+	<form class="registration-form form-horizontal" id="form"
+	accept-charset="UTF-8" method="post" style="margin: 20px;" action="@routes.AdminController.addByHand()">
+		<div class="row">
+			<div class="form-group col-sm-12">
+				<h2 class="page-heading"
+				style="text-align: left;
+					border-bottom: 5px solid #e9f3f4">新增菌种信息</h2>
+			</div>
+		</div>
+
+		<div class="row" style="line-height: 35px;">
+
+			<span class="text-success" style="line-height: 35px;">@flash.get("info")
+			</span>
+
+			<div class="form-group col-sm-12">
+				<strong>基本信息</strong>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-2">菌种编号：</label>
+			<div class="col-sm-2">
+				<input class="form-control" name="id" id="myCheckbox" required>
+			</div>
+			<label class="control-label col-sm-2">原始编号：</label>
+			<div class="col-sm-2">
+				<input class="form-control" name="originalId" required>
+			</div>
+			<label class="control-label col-sm-2">中文名称:</label>
+			<div class="col-sm-2">
+				<input class="form-control" name="chineseName" required>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-2">来源历史:</label>
+			<div class="col-sm-6">
+				<input class="form-control" name="source" required>
+			</div>
+			<label class="control-label col-sm-2">收藏时间:</label>
+			<div class="col-sm-2">
+				<input class="form-control datepicker" readonly="readonly" name="storeTime" id="datePicker">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-2">原产国:</label>
+			<div class="col-sm-2">
+				<input class="form-control" name="oPCountry" required>
+			</div>
+			<label class="control-label col-sm-2">分离基物:</label>
+			<div class="col-sm-2">
+				<input class="form-control" name="habitat" required>
+			</div>
+			<label class="control-label col-sm-2">培养温度:</label>
+			<div class="col-sm-2">
+				<input class="form-control" name="cTemperature" required>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-2">主要特征特性:</label>
+			<div class="col-sm-10">
+				<input class="form-control" name="mCharacteristic" required>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-2">保藏类型：</label>
+			<div class="col-sm-2">
+				<input class="form-control" name="pKind" required>
+			</div>
+			<label class="control-label col-sm-2">保存方法：</label>
+			<div class="col-sm-2">
+				<input class="form-control" name="pMethod" required >
+			</div>
+			<label class="control-label col-sm-2">生物危害程度：</label>
+			<div class="col-sm-2">
+				<input class="form-control" name="bHLevel" required >
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-2">实物状态：</label>
+			<div class="col-sm-2">
+				<input class="form-control" name="pState" required >
+			</div>
+			<label class="control-label col-sm-3">培养基编号（名称或配方）:</label>
+			<div class="col-sm-5">
+				<input class="form-control" name="cNumber" required>
+			</div>
+		</div>
+
+		<div class="row" style="line-height: 35px;">
+			<div class="form-group col-sm-12">
+				<strong>属信息</strong>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-2">门名：</label>
+			<div class="col-sm-4">
+				<input class="form-control" name="phylum" required >
+			</div>
+			<label class="control-label col-sm-2">纲名：</label>
+			<div class="col-sm-4">
+				<input class="form-control" name="outline" required >
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-2">目名：</label>
+			<div class="col-sm-4">
+				<input class="form-control" name="order" required >
+			</div>
+			<label class="control-label col-sm-2">科名：</label>
+			<div class="col-sm-4">
+				<input class="form-control" name="family" required >
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-2">属名：</label>
+			<div class="col-sm-4">
+				<input class="form-control" name="genus" required >
+			</div>
+			<label class="control-label col-sm-2">种名：</label>
+			<div class="col-sm-4">
+				<input class="form-control" name="species" required >
+			</div>
+		</div>
+
+		<div class="row" style="line-height: 35px;">
+			<div class="form-group col-sm-12">
+				<strong>序列信息</strong>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-2">ITS序列：</label>
+			<div class="col-sm-4">
+				<input class="form-control" name="its" required >
+			</div>
+			<label class="control-label col-sm-2">18s序列：</label>
+			<div class="col-sm-4">
+				<input class="form-control" name="eighteenS" required >
+			</div>
+		</div>
+
+		<div class="row" style="line-height: 35px;">
+			<div class="form-group col-sm-12">
+				<strong>库存信息</strong>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-2">价格：</label>
+			<div class="col-sm-4">
+				<input class="form-control" name="price" required >
+			</div>
+			<label class="control-label col-sm-2">库存：</label>
+			<div class="col-sm-4">
+				<input class="form-control" name="inventory" required>
+			</div>
+		</div>
+
+
+		<div class="form-group">
+			<div class="actions col-sm-12">
+				<input type="submit" id="submit" value="新增菌种信息"
+				class="btn btn-primary" style="width: 100%;">
+			</div>
+		</div>
+	</form>
+	<script>
+			$(document).ready(function () {
+				var myDate = new Date();
+				var year = myDate.getFullYear();
+				var month = myDate.getMonth() + 1;
+				var date = myDate.getDate();
+				var now = year + '/' + p(month) + "/" + p(date);
+				$("#datePicker").val(now)
+
+				function p(s) {
+					return s < 10 ? '0' + s : s;
+				}
+
+				var infinityNumber = Number.MAX_VALUE
+				$('#form').formValidation({
+					feedbackIcons: {
+						valid: 'glyphicon glyphicon-ok',
+						invalid: 'glyphicon glyphicon-remove',
+						validating: 'glyphicon glyphicon-refresh'
+					},
+					fields: {
+						id: {
+							validators: {
+								remote: {
+									message: "菌种编号已存在！",
+									url: "idCheck",
+									delay: 1000
+								}
+							}
+						},
+						its: {
+							validators: {
+								regexp: {
+									regexp: /^(([ATCG]+)||(NA))$/,
+									message: "ITS序列不合法！"
+								}
+							}
+						},
+						eighteenS: {
+							validators: {
+								regexp: {
+									regexp: /^(([ATCG]+)||(NA))$/,
+									message: "18s序列不合法！"
+								}
+							}
+						},
+						price: {
+							validators: {
+								integer: {
+									message: "价格必须为整数！"
+								},
+								between: {
+									min: "1",
+									max: infinityNumber,
+									message: "价格必须大于0！"
+								}
+							}
+						},
+						inventory: {
+							validators: {
+								integer: {
+									message: "库存必须为整数！"
+								},
+								between: {
+									min: "0",
+									max: infinityNumber,
+									message: "库存必须大于等于0！"
+								}
+							}
+						}
+					}
+				});
+
+			})
+
+			$("#datePicker").datepicker({
+				format: "yyyy/mm/dd",
+				language: "zh-CN"
+			})
+	</script>
+
+}

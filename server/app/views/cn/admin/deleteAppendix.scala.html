@@ -1,0 +1,141 @@
+@(id: String)
+@cn.admin.main("删除附件") {
+	<style>
+			.btn {
+				display: inline-block;
+				margin-bottom: 0;
+				font-weight: normal;
+				text-align: center;
+				vertical-align: middle;
+				-ms-touch-action: manipulation;
+				touch-action: manipulation;
+				cursor: pointer;
+				background-image: none;
+				border: 1px solid #ccc;
+				white-space: nowrap;
+				padding: 6px 12px;
+				font-size: 14px;
+				line-height: 1.42857143;
+				border-radius: 4px;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+	</style>
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<h2 class="page-heading"
+			style="text-align: left;
+				border-bottom: 5px solid #e9f3f4">删除附件</h2>
+		</div>
+	</div>
+	<div class="row" id="row">
+
+	</div>
+
+		<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="kv-zoom-actions pull-right">
+						<button type="button" class="btn btn-default btn-close" title="关闭当前预览" data-dismiss="modal" aria-hidden="true"><i class="glyphicon glyphicon-remove"></i></button></div>
+					<h3 class="modal-title">
+						详细预览&nbsp;<small><span class="kv-zoom-title" id="title"></span></small><span class="kv-zoom-title"></span></h3>
+				</div>
+				<div class="modal-body">
+					<div class="floating-buttons"></div>
+					<div class="kv-zoom-body file-zoom-content">
+						<img src="" id="image" style="height: auto;
+							width: auto;
+							max-width: 100%;
+							max-height: 100%">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+			$(document).ready(function () {
+				$.ajax({
+					url: "getAllFiles?id=@id",
+					type: "get",
+					success: function (data) {
+						var id = data.id
+						var files = data.files
+						refreshImage(id, files)
+					},
+					error: function (e) {
+						swal("错误", "图片加载失败！", "error")
+					}
+				});
+
+			})
+
+			function deleteImage(id, file) {
+				swal({
+							title: "",
+							text: "确定要此附件吗？",
+							type: "warning",
+							showCancelButton: true,
+							showConfirmButton: true,
+							confirmButtonClass: "btn-danger",
+							confirmButtonText: "确定",
+							closeOnConfirm: false,
+							cancelButtonText: "取消"
+						},
+						function () {
+							$.ajax({
+								url: "deleteFile?id=" + id + "&fileName=" + file,
+								type: "get",
+								success: function (data) {
+									var id = data.id
+									var files = data.files
+									refreshImage(id, files)
+									swal("成功！", "删除附件成功！", "success")
+								},
+								error: function (e) {
+									swal("错误", "删除失败！", "error")
+								}
+							});
+						});
+
+			}
+
+			function refreshImage(id, files) {
+				$("#row").empty()
+				var html = ""
+				if (files.length===0){
+				    html="<span style='margin:20px;'>当前菌种没有附件，请先进行<a href='@routes.AdminController.addAppendixBefore(id)'>上传</a></span>"
+				}
+				$.each(files, function (i, file) {
+					var src="/fungus/util/getImage?id="+id+"&fileName="+file+""
+					html = html + "<div class='col-sm-4'>" +
+							"<div class='thumbnail'>" +
+							"<img src='" + src + "' style='height: 250px'>" +
+							"<div class='caption'>" +
+							"<h3>" + file + "</h3>" +
+							"<p>" +
+							"<a class='btn btn-primary' role='button' onclick=\"showImage('" + src + "','" + file + "')\">" +
+							"预览 </a>&nbsp;" +
+							"<a class= 'btn btn-default' role = 'button' onclick = \"deleteImage('" + id + "','" + file + "')\" >" +
+							"删除 </a>" +
+							"</p>" +
+							"</div>" +
+							"</div>" +
+							"</div>"
+				})
+				$("#row").append(html)
+			}
+
+			function showImage(source, title) {
+				$("#image").attr("src", source)
+				$("#title").html(title)
+				$('#myModal').modal({
+					keyboard: true
+				})
+			}
+
+	</script>
+}

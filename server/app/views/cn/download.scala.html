@@ -1,0 +1,33 @@
+@()(implicit request: play.api.mvc.RequestHeader)
+@cn.main("菌种目录") {
+	<style>
+			ul > li {
+				line-height: 1.7em;
+			}
+
+	</style>
+
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<h2 class="page-heading"
+			style="text-align: left;
+				border-bottom: 5px solid #e9f3f4">菌种目录</h2>
+		</div>
+	</div>
+
+	<main class="main-content">
+
+		<article id="108" class="post">
+			<div class="post-content" style="align-content: center">
+				<img src="@routes.Assets.at("images/catalog.png")">
+			</div>
+			<div class="post-permalink">
+				<a href="@routes.IndexController.downloadData()?fileName=菌种目录-医科院国家级保藏中心批复.pdf"
+				class="btn btn-primary">阅读更多...</a>
+			</div>
+		</article>
+	</main>
+
+}
+
+	

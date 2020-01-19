@@ -1,0 +1,162 @@
+@()
+@cn.admin.main("真菌数据管理") {
+	<form style="display: none" id="form" >
+		<input id="id" name="id">
+	</form>
+	<div class="row">
+		<div class="form-group col-sm-12" style="margin-bottom: 0">
+			<h2 class="page-heading"
+			style="text-align: left;
+				border-bottom: 5px solid #e9f3f4">真菌数据管理</h2>
+		</div>
+	</div>
+
+	<div id="toolbar">
+				<button type="button" class="btn btn-primary" id="deleteButton"
+				disabled="disabled" onclick="deleteAllInfos()">
+					<i class="glyphicon glyphicon-trash"></i>&nbsp;删除选中数据
+				</button>
+				<button type="button" class="btn btn-primary" onclick="updateItsDatabase()" style="margin-left: 10px">
+					更新18S ITS Blast比对序列数据库
+				</button>
+
+
+	</div>
+
+
+	<table class="display table table-bordered" id="table" data-pagination="true" data-search="true"
+	data-toolbar="#toolbar" data-page-list="[10, 25, 50, 100, all]" data-multiple-search="true">
+		<thead>
+			<tr>
+				<th data-field="state" data-checkbox="true"></th>
+				<th data-field="id" data-sortable="true">菌种编号</th>
+				<th data-field="originalid" data-sortable="true">原始编号</th>
+				<th data-field="chinesename" data-sortable="true">中文名称</th>
+				<th data-field="source" data-sortable="true">来源历史</th>
+				<th data-field="opcountry" data-sortable="true">原产国</th>
+				<th data-field="operate">操作</th>
+				<th data-field="aOperate">附件操作</th>
+			</tr>
+		</thead>
+	</table>
+
+	<script>
+			var ids;
+			$(document).ready(function () {
+				$.ajax({
+					url: "@routes.AdminController.searchAllBasicInfos()",
+					type: "get",
+					dataType: "json",
+					success: function (data) {
+						$('#table').bootstrapTable({
+							data: data
+						});
+					},
+					error: function (e) {
+						swal("错误", "数据加载失败！", "error")
+					}
+				})
+
+				$('#table').on('check.bs.table', function (e, row) {
+					getIds()
+				})
+
+				$('#table').on('uncheck.bs.table', function (e, row) {
+					getIds()
+				})
+
+				$('#table').on('check-all.bs.table', function (e) {
+					getIds()
+				})
+
+				$('#table').on('uncheck-all.bs.table', function (e) {
+					getIds()
+				})
+
+
+			})
+
+			function getIds() {
+				ids = []
+				var arrays = $('#table').bootstrapTable('getSelections')
+				$.each(arrays, function (index, content) {
+					ids.push(content.id)
+				});
+				if (ids.length === 0) {
+					$("#deleteButton").attr("disabled", true)
+				} else {
+					$("#deleteButton").attr("disabled", false)
+				}
+			}
+
+			function deleteAllInfo(id) {
+				swal({
+							title: "",
+							text: "确定要删除此菌种数据吗？",
+							type: "warning",
+							showCancelButton: true,
+							showConfirmButton: true,
+							confirmButtonClass: "btn-danger",
+							confirmButtonText: "确定",
+							closeOnConfirm: false,
+							cancelButtonText: "取消"
+						},
+						function () {
+							$("#id").val(id)
+							$.ajax({
+								url: "deleteAllInfos",
+								type: "post",
+								data: $("#form").serialize(),
+								success: function (data) {
+									$('#table').bootstrapTable("load", data);
+									swal("成功！", "删除菌种数据成功！", "success")
+								},
+								error: function (e) {
+									swal("错误", "删除失败！", "error")
+								}
+							});
+						});
+			}
+
+			function deleteAllInfos() {
+				swal({
+							title: "",
+							text: "确定要删除选中的数据吗？",
+							type: "warning",
+							showCancelButton: true,
+							showConfirmButton: true,
+							confirmButtonClass: "btn-danger",
+							confirmButtonText: "确定",
+							closeOnConfirm: false,
+							cancelButtonText: "取消"
+						},
+						function () {
+							$("#id").val(ids.join("@(Utils.sep)"))
+							$.ajax({
+								url: "deleteAllInfos",
+								type: "post",
+								data: $("#form").serialize(),
+								success: function (data) {
+									$('#table').bootstrapTable("load", data);
+									swal("成功！", "删除菌种数据成功！", "success")
+									getIds()
+								},
+								error: function (e) {
+									swal("错误", "删除失败！", "error")
+								}
+							});
+						});
+			}
+			
+			function updateItsDatabase() {
+				$.ajax({
+					url: "@routes.AdminController.updateItsDatabase()",
+					success: function (data) {
+						swal("序列数据库", "更新完成!", "success")
+					}
+				});
+			}
+
+	</script>
+
+}

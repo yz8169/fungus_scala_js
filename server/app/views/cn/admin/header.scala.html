@@ -1,0 +1,43 @@
+@()
+<div class="page-header">
+	<div class="row">
+		<div class="col-sm-offset-2 col-md-9">
+			<h4 style="color: #F5F5F5;
+				font-size: 30px;
+				margin-bottom: 0;
+				margin-top: 20px;
+				text-shadow: 2px 2px 0 #555">Chinese Medcine Mycology Database
+			</h4>
+		</div>
+		<div class="col-sm-offset-3 col-md-9">
+			<h4 style="color: #F5F5F5;
+				font-size: 30px;
+				margin-bottom: 10px;
+				text-shadow: 2px 2px 0 #555">
+				全国医学真菌菌种保藏管理中心</h4>
+		</div>
+	</div>
+
+</div>
+
+<nav class="navbar navbar-inverse">
+	<div class="collapse navbar-collapse" id="sub">
+		<ul class="nav navbar-nav">
+			<li class="dropdown">
+				<a href="#"> 新增真菌数据 <span
+				class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="@routes.AdminController.addByFileBefore()">通过文件新增</a></li>
+					<li><a href="@routes.AdminController.addByHandBefore()">手动新增</a></li>
+				</ul>
+			</li>
+			<li><a href="@routes.AdminController.manageData"> 真菌数据管理</a></li>
+			<li><a href="@routes.AdminController.manageSubmission"> 用户购物信息</a></li>
+			<li><a href="@routes.AdminController.downloadFile"> 下载数据库</a></li>
+			<li><a href="@routes.AdminController.changePasswordBefore()"> 修改密码</a></li>
+			<li><a href="@routes.AdminController.loginBefore()"> 管理员登录</a></li>
+			<li><a href="@routes.AdminController.logout"> 管理员注销</a></li>
+		</ul>
+	</div>
+</nav>
+

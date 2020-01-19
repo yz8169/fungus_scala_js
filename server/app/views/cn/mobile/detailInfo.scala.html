@@ -1,0 +1,235 @@
+@import models.Tables.BasicinfoRow
+@import models.Tables.ClassifyRow
+@import models.Tables.AppendixRow
+@(allInfo: (BasicinfoRow, ClassifyRow, AppendixRow))
+@basicInfo = @{
+	allInfo._1
+}
+@classify = @{
+	allInfo._2
+}
+@appendix = @{
+	allInfo._3
+}
+@getImages = {
+@if(appendix.images.toUpperCase == "NA") {
+	NA
+} else {
+	@for(image <- appendix.images.split(";")) {
+		<img src="@routes.UtilController.getImage(appendix.id, image)" style="height: 20px;
+			width: 20px;cursor: pointer;" title="@image">
+			&nbsp;
+		}
+	&nbsp;<button class="button button-round preview" style="float: right">预览</button>
+}
+}
+@cn.mobile.main("菌种详细信息") {
+	<div class="page" data-ajax='false' rel='external'>
+
+		<header class="bar bar-nav">
+			<a class="button button-link button-nav pull-left back" href="../">
+				<span class="icon icon-left"></span>
+				上一级分类
+			</a>
+			<h1 class="title">详细信息</h1>
+		</header>
+		<div class="content">
+
+			<div class="list-block cards-list">
+				<ul>
+
+					<div class="card">
+						<div class="card-header">菌种编号:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@basicInfo.id</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">原始编号:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@basicInfo.originalid</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">中文名称:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@basicInfo.chinesename</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">来源历史:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@basicInfo.source</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">收藏时间:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@basicInfo.storetime</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">原产国:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@basicInfo.opcountry</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">分离基物:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@basicInfo.habitat</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">培养温度（℃）:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@basicInfo.ctemperature</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">培养基编号（名称或配方）:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@basicInfo.cnumber</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">主要特征特性:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@basicInfo.mcharacteristic</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">保藏类型:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@basicInfo.pkind</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">保存方法:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@basicInfo.pmethod</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">生物危害程度:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@basicInfo.bhlevel</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">实物状态:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@basicInfo.pstate</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">门名:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@classify.phylum</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">纲名:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@classify.outline</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">目名:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@classify.order</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">科名:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@classify.family</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">属名:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@classify.genus</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">种名加词:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@classify.species</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">ITS序列:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@basicInfo.its</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">18S序列:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@basicInfo.eighteens</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">价格:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@basicInfo.price</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">附件:</div>
+						<div class="card-content">
+							<div class="card-content-inner">@getImages</div>
+						</div>
+					</div>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<script>
+			$(function () {
+				var myPhotoBrowserStandalone = $.photoBrowser({
+					photos: [
+						@for(image <- appendix.images.split(";")) {
+						"@routes.UtilController.getImage(appendix.id, image)",
+						}
+					]
+				});
+				$(document).on('click', '.preview', function () {
+					myPhotoBrowserStandalone.open();
+				});
+			})
+	</script>
+
+}
+
+
+
+
+
+
+
+
